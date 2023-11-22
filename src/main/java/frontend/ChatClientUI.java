@@ -1,15 +1,21 @@
 package frontend;
 
 import backend.Client;
+import backend.models.AuthenticationDTO;
+import backend.models.RequestObject;
+import backend.utils.enums.Action;
+import backend.utils.enums.Method;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class ChatClientUI extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JFormattedTextField formattedTextField1;
+    private JFormattedTextField usernameInput;
+    private JTextField passwordInput;
     Client client; // Reference to ChatClient
 
     public ChatClientUI(Client client) {
@@ -20,7 +26,11 @@ public class ChatClientUI extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                try {
+                    onOK();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -46,14 +56,18 @@ public class ChatClientUI extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void onOK() throws IOException {
         // Get message from formattedTextField1 and send it
-        String message = formattedTextField1.getText().trim();
-        if (!message.isEmpty()) {
-            client.sendMessage(message);
-            formattedTextField1.setText("");
-        }
-
+        String username = usernameInput.getText().trim();
+        String password = passwordInput.getText().trim();
+        AuthenticationDTO authenticationDTO = new AuthenticationDTO(username, password);
+        RequestObject requestObject = new RequestObject();
+        requestObject.setAction(Action.SIGNUP);
+        requestObject.setObject(authenticationDTO);
+        requestObject.setMethod(Method.POST);
+        client.sendObject(requestObject);
+        usernameInput.setText("");
+        passwordInput.setText("");
     }
     public void setClient(Client client) {
         this.client = client;
@@ -67,7 +81,7 @@ public class ChatClientUI extends JDialog {
     public static void main(String[] args) {
         Client client = new Client("127.0.0.1", 9991); // Replace with actual server address and port
         ChatClientUI dialog = new ChatClientUI(client);
-            dialog.pack();
-            dialog.setVisible(true);
+        dialog.pack();
+        dialog.setVisible(true);
     }
 }

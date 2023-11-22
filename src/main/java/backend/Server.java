@@ -4,6 +4,7 @@ import backend.middleware.RequestRouter;
 import backend.models.RequestObject;
 import backend.models.ResponseObject;
 import backend.security.UserCredentialsManager;
+import backend.utils.enums.StatusCode;
 
 import java.io.*;
 import java.net.*;
@@ -62,32 +63,37 @@ public class Server {
         private ObjectInputStream objectIn;
         private ObjectOutputStream objectOut;
         private volatile boolean isActive = true;
-        private UserCredentialsManager credentialsManager;
         private  RequestRouter requestRouter;
 
         public ClientHandler(Socket socket) throws IOException {
             this.clientSocket = socket;
-            this.credentialsManager = UserCredentialsManager.getInstance();
             this.objectOut = new ObjectOutputStream(clientSocket.getOutputStream());
-            this.objectOut.flush();
-            this.objectIn = new ObjectInputStream(clientSocket.getInputStream());
+            InputStream inputStream = socket.getInputStream();
+            this.objectIn = new ObjectInputStream(inputStream);
             this.requestRouter = RequestRouter.getInstance();
-
+            System.out.println("new Client connected:" +socket.getInetAddress() + " "+ socket.getChannel());
         }
 
         public void run() {
             try {
                 while (isActive) {
                     Object obj = objectIn.readObject();
+                    System.out.println("recieved object from the client : "+ obj.toString());
                     if (obj instanceof RequestObject) {
                         RequestObject request = (RequestObject) obj;
                         ResponseObject requestResponse = requestRouter.routeRequest(request);
                         objectOut.writeObject(requestResponse);
                         objectOut.flush();
                     }
+                    else {
+                        System.out.println("Bad request invalid payload");
+                        ResponseObject requestResponse = new ResponseObject(StatusCode.BAD_REQUEST, null, "Bad invalid");
+                        objectOut.writeObject(requestResponse);
+                        objectOut.flush();
+                    }
                 }
             } catch (IOException | ClassNotFoundException e) {
-                // Exception handling
+                // todo handle this error
             } finally {
                 cleanUp();
             }

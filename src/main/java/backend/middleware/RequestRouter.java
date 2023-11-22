@@ -1,9 +1,9 @@
 package backend.middleware;
 
 import backend.controllers.AuthenticationController;
+import backend.interfaces.Controller;
 import backend.models.RequestObject;
 import backend.models.ResponseObject;
-import backend.security.Token;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestRouter {
-    private final Map<Action, AuthenticationController> controllers;
+    private final Map<Action, Controller> controllers;
     private final Interceptor interceptor;
     private static RequestRouter instance = null;
     public static synchronized RequestRouter getInstance() {
@@ -35,7 +35,7 @@ public class RequestRouter {
         }
 
         Action action = request.getAction();
-        AuthenticationController controller = controllers.get(action);
+        Controller controller = controllers.get(action);
 
         if (controller != null) {
             return controller.handleRequest(request);
@@ -43,5 +43,6 @@ public class RequestRouter {
             return new ResponseObject(StatusCode.BAD_REQUEST, null,"Unknown action");
         }
     }
+
 
 }
