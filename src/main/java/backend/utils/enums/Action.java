@@ -18,6 +18,7 @@ public enum Action {
         switch (this) {
             case LOGIN:
             case SIGNUP:
+            case FOLLOW:
                 return false;
             default:
                 return true;

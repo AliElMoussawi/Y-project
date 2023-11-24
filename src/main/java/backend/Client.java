@@ -1,9 +1,16 @@
 package backend;
 
+import backend.models.AuthenticationDTO;
+import backend.models.FollowClientDTO;
+import backend.models.RequestObject;
 import backend.models.ResponseObject;
+import backend.utils.enums.Action;
+import backend.utils.enums.Method;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Client {
     private Socket socket;
@@ -27,10 +34,22 @@ public class Client {
 
             System.out.println("Sending messages to the ServerSocket");
 
-            objectOut.writeObject("messages");
+            Scanner scan=new Scanner(System.in);
+
+            System.out.print("Enter user credentials");
+            String user1=scan.next();
+            String pass1=scan.next();
+
+
+
+            objectOut.writeObject(new RequestObject(Action.SIGNUP,new AuthenticationDTO(user1,pass1),(long)22,"token",null));
 
             objectOut.flush();
 
+//            while(!pass1.equals("!")){
+//                objectOut.writeObject(new RequestObject(Action.FOLLOW,new FollowClientDTO(new AuthenticationDTO(user1,pass1),new AuthenticationDTO("1","pass1")),(long)22,"token",null));
+//                pass1=scan.next();
+//            }
             new Thread(new ReadThread()).start();
 
         } catch (IOException e) {
@@ -45,7 +64,7 @@ public class Client {
                 while ((response = objectIn.readObject()) != null) {
                     System.out.println("response: "+response+" response type:"+response.getClass());
                     if (response instanceof ResponseObject) {
-                        ResponseObject responseObject = ((ResponseObject) response);
+                        ResponseObject responseObject = (ResponseObject) response;
                         // just for checking
                         System.out.println("Received: " + responseObject.getStatusCode() +" object:  "+((responseObject.getObject()==null)? " null ": responseObject.getObject())+" "+ responseObject.getMessage());
                     }
@@ -65,9 +84,11 @@ public class Client {
 
     public static void main(String[] args) {
 
-        String host = "127.0.0.1";
+        String host = "localhost";
         int port = 9991;
 
         new Client(host, port);
+        new Client(host, port);
+
     }
 }

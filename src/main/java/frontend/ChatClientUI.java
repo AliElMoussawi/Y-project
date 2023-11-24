@@ -61,7 +61,7 @@ public class ChatClientUI extends JDialog {
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText().trim();
         AuthenticationDTO authenticationDTO = new AuthenticationDTO(username, password);
-        RequestObject requestObject = new RequestObject();
+        RequestObject requestObject = new RequestObject(Action.SIGNUP,new AuthenticationDTO("newdertdffga","hehfertgddehea"),(long)22,"token",null);
         requestObject.setAction(Action.SIGNUP);
         requestObject.setObject(authenticationDTO);
         requestObject.setMethod(Method.POST);

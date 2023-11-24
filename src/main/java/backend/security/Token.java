@@ -16,12 +16,13 @@ public class Token {
 
     public String createToken(String username) {
         long currentTimeMillis = System.currentTimeMillis();
-        return Jwts.builder()
+
+        String result = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(currentTimeMillis))
                 .setExpiration(new Date(currentTimeMillis + 3600000)) // 1 hour token validity
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-                .compact();
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY.getBytes()).compact();
+        return result;
     }
     public boolean validateToken(String token) {
         try {

@@ -17,5 +17,4 @@ public class ResponseObject implements Serializable {
     private Object object;
     private String message;
 
-
 }

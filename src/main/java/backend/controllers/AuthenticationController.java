@@ -4,11 +4,13 @@ import backend.interfaces.Controller;
 import backend.models.AuthenticationDTO;
 import backend.models.RequestObject;
 import backend.models.ResponseObject;
+import backend.security.Token;
 import backend.security.UserCredentialsManager;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
+import lombok.Getter;
 
-
+@Getter
 public class AuthenticationController implements Controller {
     UserCredentialsManager userCredentialsManager = UserCredentialsManager.getInstance();
 
@@ -19,8 +21,9 @@ public class AuthenticationController implements Controller {
             case SIGNUP:
                 Object data = request.getObject();
                 if (data instanceof AuthenticationDTO) {
-                    AuthenticationDTO cridentials = (AuthenticationDTO) data;
-                    return processAuthentication(cridentials, request.getAction());
+                    AuthenticationDTO cred = (AuthenticationDTO) data;
+                    AuthenticationDTO credentials =new AuthenticationDTO(cred.getUsername(),cred.getPassword());
+                    return processAuthentication(credentials, request.getAction());
                 } else {
                     return new ResponseObject(StatusCode.BAD_REQUEST, null,"Invalid authentication data");
                 }
@@ -53,7 +56,7 @@ public class AuthenticationController implements Controller {
             return new ResponseObject(StatusCode.OK, token, "Signed up successful");
 
         } catch (Exception e) {
-            return new ResponseObject(StatusCode.UNAUTHORIZED, null, "Signing up failed");
+            return new ResponseObject(StatusCode.UNAUTHORIZED, null, e.getMessage());
         }
     }
 

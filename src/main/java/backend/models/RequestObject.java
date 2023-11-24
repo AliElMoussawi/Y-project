@@ -2,7 +2,7 @@ package backend.models;
 
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
-import jdk.nashorn.internal.objects.annotations.Constructor;
+//import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +21,6 @@ public class RequestObject implements Serializable {
     private long timeOfCreation;
     private String token;
     private Method method;
+
 
 }

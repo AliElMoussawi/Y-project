@@ -1,6 +1,7 @@
 package backend.middleware;
 
 import backend.controllers.AuthenticationController;
+import backend.controllers.FollowUserController;
 import backend.interfaces.Controller;
 import backend.models.RequestObject;
 import backend.models.ResponseObject;
@@ -26,6 +27,7 @@ public class RequestRouter {
         // Initialize controllers for each action
         controllers.put(Action.LOGIN, new AuthenticationController());
         controllers.put(Action.SIGNUP, new AuthenticationController());
+        controllers.put(Action.FOLLOW,new FollowUserController());
 
     }
 
