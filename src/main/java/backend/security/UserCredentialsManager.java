@@ -6,6 +6,7 @@ public class UserCredentialsManager {
     private final Map<String, String> userCredentials;
     private static UserCredentialsManager instance = null;
     private static Token token;
+
     public UserCredentialsManager() {
         userCredentials = new HashMap<>();
         token = Token.getInstance();
@@ -17,6 +18,7 @@ public class UserCredentialsManager {
         }
         return instance;
     }
+
     public boolean isUser(String username, String password) {
         return userCredentials.containsKey(username) && userCredentials.get(username).equals(password);
     }
@@ -30,16 +32,17 @@ public class UserCredentialsManager {
     }
 
     public String authenticate(String username, String password) throws Exception {
-        if (isUser(username, password)){
+        if (isUser(username, password)) {
             return token.createToken(username);
         }
         throw new Exception("User doesn't exist");
     }
-    public String signUp(String username, String password) throws Exception {
-            if (register(username, password)){
-                return token.createToken(username);
-            }
-        throw new Exception("User already exist");
 
+    public String signUp(String username, String password) throws Exception {
+        if (register(username, password)) {
+            return token.createToken(username);
+        }
+        throw new Exception("User already exist");
     }
+
 }

@@ -2,20 +2,28 @@ package backend.models;
 
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ResponseObject implements Serializable {
     private static final long serialVersionUID = 1L;
+    @NonNull
     private StatusCode statusCode;
     private Object object;
+    @NonNull
     private String message;
+    private String requestId;
 
-
+    public ResponseObject(@NotNull StatusCode statusCode, Object object,@NotNull String message) {
+        this.statusCode = statusCode;
+        this.object = object;
+        this.message = message;
+        this.requestId = null;
+    }
 }

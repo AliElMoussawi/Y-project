@@ -6,13 +6,14 @@ import java.util.Date;
 
 public class Token {
     private static Token instance = null;
+    private static final String SECRET_KEY = "Y-CMPS-242";
+
     public static synchronized Token getInstance() {
         if (instance == null) {
             instance = new Token();
         }
         return instance;
     }
-    private static final String SECRET_KEY = "Y-CMPS-242";
 
     public String createToken(String username) {
         long currentTimeMillis = System.currentTimeMillis();
@@ -42,4 +43,5 @@ public class Token {
         }
         return false;
     }
+
 }

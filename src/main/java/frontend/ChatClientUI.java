@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+import static backend.Client.createRequest;
+
 public class ChatClientUI extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -65,9 +67,11 @@ public class ChatClientUI extends JDialog {
         requestObject.setAction(Action.SIGNUP);
         requestObject.setObject(authenticationDTO);
         requestObject.setMethod(Method.POST);
-        client.sendObject(requestObject);
+      //  client.sendObject(requestObject);
+        createRequest(client, requestObject);
         usernameInput.setText("");
         passwordInput.setText("");
+
     }
     public void setClient(Client client) {
         this.client = client;
@@ -79,7 +83,7 @@ public class ChatClientUI extends JDialog {
     }
 
     public static void main(String[] args) {
-        Client client = new Client("127.0.0.1", 9991); // Replace with actual server address and port
+        Client client = new Client("127.0.0.1", 9991, 1); // Replace with actual server address and port
         ChatClientUI dialog = new ChatClientUI(client);
         dialog.pack();
         dialog.setVisible(true);

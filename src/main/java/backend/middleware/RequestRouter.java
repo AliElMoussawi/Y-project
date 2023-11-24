@@ -14,12 +14,14 @@ public class RequestRouter {
     private final Map<Action, Controller> controllers;
     private final Interceptor interceptor;
     private static RequestRouter instance = null;
+
     public static synchronized RequestRouter getInstance() {
         if (instance == null) {
             instance = new RequestRouter();
         }
         return instance;
     }
+
     public RequestRouter() {
         this.interceptor = new Interceptor();
         this.controllers = new HashMap<>();
@@ -43,6 +45,5 @@ public class RequestRouter {
             return new ResponseObject(StatusCode.BAD_REQUEST, null,"Unknown action");
         }
     }
-
 
 }

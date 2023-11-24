@@ -11,6 +11,5 @@ public class HttpServerTest {
 
     @Test
     public void testEndpoint() throws Exception {
-
-}
+    }
 }

@@ -38,6 +38,7 @@ public class AuthenticationController implements Controller {
             return new ResponseObject(StatusCode.BAD_REQUEST, null,"Invalid action for authentication");
         }
     }
+
     public ResponseObject authenticateUser(String username, String password) {
         try {
             String token = userCredentialsManager.authenticate(username, password);
@@ -47,6 +48,7 @@ public class AuthenticationController implements Controller {
             return new ResponseObject(StatusCode.UNAUTHORIZED, null, "Authentication failed");
         }
     }
+
     public ResponseObject registerUser(String username, String password) {
         try {
             String token = userCredentialsManager.signUp(username, password);
@@ -56,6 +58,5 @@ public class AuthenticationController implements Controller {
             return new ResponseObject(StatusCode.UNAUTHORIZED, null, "Signing up failed");
         }
     }
-
 
 }

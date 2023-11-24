@@ -3,7 +3,6 @@ package backend;
 import backend.middleware.RequestRouter;
 import backend.models.RequestObject;
 import backend.models.ResponseObject;
-import backend.security.UserCredentialsManager;
 import backend.utils.enums.StatusCode;
 
 import java.io.*;
@@ -15,13 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Server {
     private static final int PORT = 9991;
-    private static CopyOnWriteArrayList<ClientHandler> clients = new CopyOnWriteArrayList<>();
+    public static CopyOnWriteArrayList<ClientHandler> clients = new CopyOnWriteArrayList<>();
     private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    public static void main(String[] args) throws IOException {
-        socketServer();
 
-    }
     private static void socketServer() throws IOException {
         ServerSocket serverSocket = new ServerSocket(PORT);
         System.out.println("Server started. Listening on Port " + PORT);
@@ -82,6 +78,7 @@ public class Server {
                     if (obj instanceof RequestObject) {
                         RequestObject request = (RequestObject) obj;
                         ResponseObject requestResponse = requestRouter.routeRequest(request);
+                        requestResponse.setRequestId(request.getId());
                         objectOut.writeObject(requestResponse);
                         objectOut.flush();
                     }
@@ -107,6 +104,7 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
 
 
@@ -123,6 +121,10 @@ public class Server {
                 isActive = false;
             }
         }
+
+    }
+    public static void main(String[] args) throws IOException {
+        socketServer();
 
     }
 }
