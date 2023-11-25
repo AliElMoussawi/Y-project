@@ -1,9 +1,9 @@
 package backend.controllers;
 
 import backend.interfaces.Controller;
-import backend.models.AuthenticationDTO;
-import backend.models.RequestObject;
-import backend.models.ResponseObject;
+import backend.dto.AuthenticationDTO;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.ResponseObject;
 import backend.security.UserCredentialsManager;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;

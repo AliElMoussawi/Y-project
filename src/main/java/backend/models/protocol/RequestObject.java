@@ -1,13 +1,11 @@
-package backend.models;
+package backend.models.protocol;
 
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.UUID;
 
 import java.io.Serializable;
 @Getter

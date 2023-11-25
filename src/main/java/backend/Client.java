@@ -1,8 +1,8 @@
 package backend;
 
-import backend.models.ResponseObject;
-import backend.models.RequestObject;
-import backend.models.SocketObject;
+import backend.models.protocol.ResponseObject;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.SocketObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
 import org.jetbrains.annotations.NotNull;

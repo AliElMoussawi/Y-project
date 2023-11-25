@@ -1,8 +1,6 @@
-package backend.models;
+package backend.models.protocol;
 
-import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 

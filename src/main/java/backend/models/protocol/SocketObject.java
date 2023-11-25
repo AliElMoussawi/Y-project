@@ -1,4 +1,4 @@
-package backend.models;
+package backend.models.protocol;
 
 import backend.utils.enums.Action;
 import lombok.AllArgsConstructor;

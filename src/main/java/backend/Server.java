@@ -1,9 +1,12 @@
 package backend;
 
 import backend.middleware.RequestRouter;
-import backend.models.RequestObject;
-import backend.models.ResponseObject;
+import backend.models.database.User;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.ResponseObject;
+import backend.services.UserServiceImpl;
 import backend.utils.enums.StatusCode;
+
 
 import java.io.*;
 import java.net.*;
@@ -124,7 +127,12 @@ public class Server {
 
     }
     public static void main(String[] args) throws IOException {
+//        UserServiceImpl userService = new UserServiceImpl();
+//        User user = new User();
+//        user.setFullName("John Smith1");
+//        user.setUsername("johnSmith1");
+//        user.setEmail("johnsmith1@gmail.com");
+//        userService.createUser(user);
         socketServer();
-
     }
 }

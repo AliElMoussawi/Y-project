@@ -2,8 +2,8 @@ package backend.middleware;
 
 import backend.controllers.AuthenticationController;
 import backend.interfaces.Controller;
-import backend.models.RequestObject;
-import backend.models.ResponseObject;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.ResponseObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
 

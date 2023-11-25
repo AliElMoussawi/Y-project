@@ -1,8 +1,8 @@
 package frontend;
 
 import backend.Client;
-import backend.models.AuthenticationDTO;
-import backend.models.RequestObject;
+import backend.dto.AuthenticationDTO;
+import backend.models.protocol.RequestObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
 
