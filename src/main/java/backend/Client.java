@@ -112,7 +112,7 @@ public class Client {
         request.setMethod(Method.POST);
         request.setAction(Action.FOLLOW);
         request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhc2RhYXNzZCIsImlhdCI6MTcwMDg0NTI3NiwiZXhwIjoxNzAwODQ4ODc2fQ.lbJ2VJyL2gfdpQr-42_FLlGQTzHnkB-Xw8ocRMWgDbskRiKDCUavhuaNL8JYDOB5Gf18bUixn2lVFu4wX3p4Cw");
-        createRequest(client, request);
+        ResponseObject object = createRequest(client, request);
 
     }
 }
