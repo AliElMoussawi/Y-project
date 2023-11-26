@@ -6,7 +6,8 @@ import backend.models.database.User;
 import java.sql.*;
 
 public class UserRepositoryImpl implements UserRepository {
-    public User findById(long id){
+
+    public User findById(long id) {
         String sql = "SELECT * FROM Users WHERE id = ?";
         try (java.sql.Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -24,15 +25,34 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
-    public void save(User user) {
+    public User findByUsernameOrEmail(String usernameOrEmail) {
+        String sql = "SELECT * FROM y.Users WHERE username = ? OR email = ?";
+        try (java.sql.Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, usernameOrEmail);
+            preparedStatement.setString(2, usernameOrEmail);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return extractUserFromResultSet(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean save(User user) {
         if (user.getId() == null) {
-            insertUser(user);
+            return insertUser(user);
         } else {
-            updateUser(user);
+            return updateUser(user);
         }
     }
 
-    private void insertUser(User user) {
+    private boolean insertUser(User user) {
         String sql = "INSERT INTO y.Users (username, email, password, fullName, bio, location, website, profilePictureUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (java.sql.Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -41,12 +61,14 @@ public class UserRepositoryImpl implements UserRepository {
 
             int affectedRows = preparedStatement.executeUpdate();
             handleGeneratedKeys(user, preparedStatement, affectedRows);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    private void updateUser(User user) {
+    private boolean updateUser(User user) {
         String sql = "UPDATE y.Users SET username = ?, email = ?, password = ?, fullName = ?, bio = ?, location = ?, website = ?, profilePictureUrl = ? WHERE id = ?";
         try (java.sql.Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -55,9 +77,11 @@ public class UserRepositoryImpl implements UserRepository {
             preparedStatement.setLong(9, user.getId());
 
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     private void setPreparedStatement(PreparedStatement preparedStatement, User user) throws SQLException {

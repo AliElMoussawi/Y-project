@@ -3,7 +3,8 @@ package backend.repositories;
 import backend.models.database.User;
 
 public interface UserRepository {
-    public User findById(long id);
-    void save(User user);
+    User findById(long id);
+    User findByUsernameOrEmail(String usernameOrEmail);
+    boolean save(User user);
 
 }

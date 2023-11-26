@@ -1,5 +1,6 @@
 package backend;
 
+import backend.dto.AuthenticationDTO;
 import backend.models.protocol.ResponseObject;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.SocketObject;
@@ -52,7 +53,7 @@ public class Client {
 
                     if (receivedObject instanceof ResponseObject) {
                         processResponseObject((ResponseObject) receivedObject);
-                        System.out.println("Received: " + ((ResponseObject) receivedObject).getStatusCode() +" object:  "+((((ResponseObject) receivedObject).getObject()==null)? " null ": ((ResponseObject) receivedObject).getObject())+" "+ ((ResponseObject) receivedObject).getMessage());
+                        System.out.println("Received: " + ((ResponseObject) receivedObject).getStatusCode() +" object:  "+((((ResponseObject) receivedObject).getObject() == null)? " null ": ((ResponseObject) receivedObject).getObject())+" "+ ((ResponseObject) receivedObject).getMessage());
                     } else if (receivedObject instanceof SocketObject) {
                         processSocketObject((SocketObject) receivedObject);
                     }
@@ -108,9 +109,10 @@ public class Client {
         int port = 9991;
         Client client = new Client(host, port, 1);
         RequestObject request = new RequestObject();
-        request.setObject("Some request data");
+        AuthenticationDTO authenticationDTO = new AuthenticationDTO("johnsmith2",null, "john@123");
+        request.setObject(authenticationDTO);
         request.setMethod(Method.POST);
-        request.setAction(Action.FOLLOW);
+        request.setAction(Action.LOGIN);
         request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhc2RhYXNzZCIsImlhdCI6MTcwMDg0NTI3NiwiZXhwIjoxNzAwODQ4ODc2fQ.lbJ2VJyL2gfdpQr-42_FLlGQTzHnkB-Xw8ocRMWgDbskRiKDCUavhuaNL8JYDOB5Gf18bUixn2lVFu4wX3p4Cw");
         ResponseObject object = createRequest(client, request);
 

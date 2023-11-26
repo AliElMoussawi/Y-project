@@ -62,7 +62,7 @@ public class ChatClientUI extends JDialog {
         // Get message from formattedTextField1 and send it
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText().trim();
-        AuthenticationDTO authenticationDTO = new AuthenticationDTO(username, password);
+        AuthenticationDTO authenticationDTO = new AuthenticationDTO(username, null, password);
         RequestObject requestObject = new RequestObject();
         requestObject.setAction(Action.SIGNUP);
         requestObject.setObject(authenticationDTO);

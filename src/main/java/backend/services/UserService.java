@@ -4,6 +4,7 @@ import backend.models.database.User;
 
 public interface UserService {
     User getUserById(int id);
-    void createUser(User user);
-
+    User getUserByUsernameOrEmail(String usernameOrEmail);
+    String createUser(User user) throws Exception;
+    String authenticate(String usernameOrEmail, String passowrd) throws Exception;
 }

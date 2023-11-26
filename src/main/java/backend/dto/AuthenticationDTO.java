@@ -12,5 +12,7 @@ import java.io.Serializable;
 public class AuthenticationDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private String username;
+    private String email;
     private String password;
+
 }
