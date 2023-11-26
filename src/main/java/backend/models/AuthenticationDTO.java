@@ -15,15 +15,15 @@ public class AuthenticationDTO implements Serializable {
     private String username;
     private String password;
 
-    private CopyOnWriteArrayList<AuthenticationDTO> followers;
+    private CopyOnWriteArrayList<String> followers;
 
-    private CopyOnWriteArrayList<AuthenticationDTO> following;
+    private CopyOnWriteArrayList<String> following;
 
     public AuthenticationDTO(String Username,String Password){
         ID+=1;
         this.username=Username;
         this.password=Password;
-        this.followers=new CopyOnWriteArrayList<AuthenticationDTO>();
-        this.following=new CopyOnWriteArrayList<AuthenticationDTO>();
+        this.followers=new CopyOnWriteArrayList<String>();
+        this.following=new CopyOnWriteArrayList<String>();
     }
 }

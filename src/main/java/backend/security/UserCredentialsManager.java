@@ -17,6 +17,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserCredentialsManager {
     private final Map<String, String> userCredentials;
     private static UserCredentialsManager instance = null;
+
+    static DatabaseConnection DB_connection=new DatabaseConnection();
     private static Token token;
     public UserCredentialsManager() {
         userCredentials = new HashMap<>();
@@ -37,7 +39,7 @@ public class UserCredentialsManager {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
-        KeySpec spec = new PBEKeySpec("password".toCharArray(), salt, 65536, 128);
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         try {
             SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             byte[] hash = f.generateSecret(spec).getEncoded();
@@ -52,39 +54,21 @@ public class UserCredentialsManager {
         }
 
     }
-    public Map<String,String> getUserCredentials(){
-        return this.userCredentials;
-    }
+
     public boolean register(String username, String password)  {
         if (userCredentials.containsKey(username)) {
             return false;
         }
-        DatabaseConnection connection=new DatabaseConnection();
-        Connection connect=connection.getConnection();
+
 
         String pass=hashPassword(password);
-
         if(pass==null)
             throw new RuntimeException("An error occurred with password hashing");
 
+        return DB_connection.db_Register(username,pass);
 
-        String sql = "INSERT INTO Y.Yapper (name, password) " +
-                "VALUES (?,?)";
 
-        try (PreparedStatement preparedStatement = connect.prepareStatement(sql)) {
-            // Set parameter values
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,pass);
-            // Execute the query
-            int rowsAffected = preparedStatement.executeUpdate();
-
-            System.out.println(rowsAffected + " row(s) inserted.");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        userCredentials.put(username, password);
-
-        return true;
+        //userCredentials.put(username, password);
     }
 
     public String authenticate(String username, String password) throws Exception {

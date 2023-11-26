@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff5c01e6-9a2c-4ea5-be87-1d684c7a7673" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controllers/FollowUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/controllers/FollowUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/models/AuthenticationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/models/AuthenticationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/models/RequestObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/models/RequestObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/models/ResponseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/models/ResponseObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/security/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/security/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/models/FollowClientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/models/FollowClientDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/security/UserCredentialsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/security/UserCredentialsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frontend/ChatClientUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frontend/ChatClientUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +182,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/backend/Main.java</url>
           <line>15</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/backend/security/UserCredentialsManager.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/backend/DatabaseConnection.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NoClassDefFoundError" package="java.lang" />

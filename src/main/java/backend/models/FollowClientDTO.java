@@ -13,7 +13,7 @@ import java.net.Socket;
 public class FollowClientDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private AuthenticationDTO user;
-    private AuthenticationDTO user_to_follow;
+    private String user_to_follow;
 
 
     //table of users

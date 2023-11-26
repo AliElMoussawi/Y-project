@@ -46,10 +46,9 @@ public class Client {
 
             objectOut.flush();
 
-//            while(!pass1.equals("!")){
-//                objectOut.writeObject(new RequestObject(Action.FOLLOW,new FollowClientDTO(new AuthenticationDTO(user1,pass1),new AuthenticationDTO("1","pass1")),(long)22,"token",null));
-//                pass1=scan.next();
-//            }
+//            if(!pass1.equals("pass1"))
+//                objectOut.writeObject(new RequestObject(Action.FOLLOW,new FollowClientDTO(new AuthenticationDTO(user1,pass1),"user3use"),(long)22,"token",null));
+
             new Thread(new ReadThread()).start();
 
         } catch (IOException e) {
@@ -88,7 +87,7 @@ public class Client {
         int port = 9991;
 
         new Client(host, port);
-        new Client(host, port);
+       // new Client(host, port);
 
     }
 }
