@@ -9,36 +9,40 @@ import backend.utils.enums.Method;
 import backend.utils.enums.StatusCode;
 
 import javax.swing.*;
-import java.awt.event.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static backend.Client.createRequest;
 
-public class LoginUI extends JDialog {
+public class SignUpUI extends JDialog {
     private JPanel contentPane;
-    private JFormattedTextField usernameOrEmail;
+    private JButton signUpButton;
+    private JTextField emailInput;
+    private JTextField usernameInput;
     private JPasswordField passwordInput;
-    private JButton loginButton;
-    Client client; // Reference to ChatClient
+    Client client;
 
-    public LoginUI(Client client) {
+    public SignUpUI(Client client) {
         this.client = client;
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(loginButton);
-
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onLogin();
-            }
+        getRootPane().setDefaultButton(signUpButton);
+        signUpButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            onSignUp();
+        }
         });
     }
 
-    private void onLogin() {
-        String username = usernameOrEmail.getText().trim();
+    private void onSignUp() {
+        String username = usernameInput.getText().trim();
+        String email = emailInput.getText().trim();
         String password = passwordInput.getText().trim();
-        AuthenticationDTO authenticationDTO = new AuthenticationDTO(username, null, password);
+
+        AuthenticationDTO authenticationDTO = new AuthenticationDTO(username, email, password);
         RequestObject requestObject = new RequestObject();
-        requestObject.setAction(Action.LOGIN);
+        requestObject.setAction(Action.SIGNUP);
         requestObject.setObject(authenticationDTO);
         requestObject.setMethod(Method.POST);
         ResponseObject responseObject = createRequest(client, requestObject);
@@ -46,13 +50,14 @@ public class LoginUI extends JDialog {
             String token = String.valueOf(responseObject.getObject());
             // navigate to the second page we can pass the token as argument
         }
-        usernameOrEmail.setText("");
+        usernameInput.setText("");
+        emailInput.setText("");
         passwordInput.setText("");
     }
 
     public static void main(String[] args) {
         Client client = new Client("127.0.0.1", 9991, 1);
-        LoginUI dialog = new LoginUI(client);
+        SignUpUI dialog = new SignUpUI(client);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
