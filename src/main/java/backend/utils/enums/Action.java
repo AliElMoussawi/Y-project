@@ -4,15 +4,20 @@ public enum Action {
     LOGIN,
     SIGNUP,
     UPLOAD_POST,
+    GET_POST,
     EDIT_POST,
     DELETE_POST,
     LIKE_POST,
+    UNLIKE_POST,
+    REPOST,
     COMMENT,
     REPLY,
-    REPOST,
     FOLLOW,
     ACCEPT_FOLLOW,
     UNFOLLOW,
+    GET_FOLLOW,
+    GET_FOLLOWING,
+    GET_PROFILE,
     EDIT_PROFILE;
     public boolean requiresToken() {
         switch (this) {
