@@ -1,6 +1,7 @@
 package backend.middleware;
 
 import backend.controllers.AuthenticationController;
+import backend.controllers.EventController;
 import backend.interfaces.Controller;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
@@ -28,10 +29,11 @@ public class RequestRouter {
         // Initialize controllers for each action
         controllers.put(Action.LOGIN, new AuthenticationController());
         controllers.put(Action.SIGNUP, new AuthenticationController());
-
+        controllers.put(Action.FOLLOW,new EventController());
+        controllers.put(Action.UNFOLLOW,new EventController());
     }
 
-    public ResponseObject routeRequest(RequestObject request) {
+    public ResponseObject routeRequest(RequestObject request) throws Exception {
         if (!interceptor.validRequest(request)) {
             return new ResponseObject(StatusCode.UNAUTHORIZED, null, "Invalid token or request");
         }

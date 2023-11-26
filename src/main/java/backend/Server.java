@@ -92,6 +92,8 @@ public class Server {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 // todo handle this error
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             } finally {
                 cleanUp();
             }

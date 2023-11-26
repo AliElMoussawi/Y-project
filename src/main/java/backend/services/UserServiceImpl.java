@@ -5,6 +5,8 @@ import backend.repositories.UserRepository;
 import backend.repositories.UserRepositoryImpl;
 import backend.security.Token;
 
+import java.sql.SQLException;
+
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository = new UserRepositoryImpl();
     private static final Token token = Token.getInstance();
@@ -19,6 +21,7 @@ public class UserServiceImpl implements UserService {
     public User getUserByUsernameOrEmail(String usernameOrEmail) {
         return userRepository.findByUsernameOrEmail(usernameOrEmail);
     }
+
 
     public String authenticate(String usernameOrEmail, String password) throws Exception {
         User user = getUserByUsernameOrEmail(usernameOrEmail);
@@ -43,5 +46,6 @@ public class UserServiceImpl implements UserService {
         }
         throw new Exception("Error while creating the account");
     }
+
 
 }

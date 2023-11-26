@@ -1,6 +1,7 @@
 package backend;
 
 import backend.dto.AuthenticationDTO;
+import backend.dto.EventDTO;
 import backend.models.protocol.ResponseObject;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.SocketObject;
@@ -108,12 +109,14 @@ public class Client {
         String host = "127.0.0.1";
         int port = 9991;
         Client client = new Client(host, port, 1);
+
         RequestObject request = new RequestObject();
-        AuthenticationDTO authenticationDTO = new AuthenticationDTO("johnsmith2",null, "john@123");
+        //AuthenticationDTO authenticationDTO=new AuthenticationDTO("jakepaul13","jake@prime.com","jake@123");
+        EventDTO authenticationDTO = new EventDTO("jakepaul13","loganpaul13");
         request.setObject(authenticationDTO);
         request.setMethod(Method.POST);
-        request.setAction(Action.LOGIN);
-        request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhc2RhYXNzZCIsImlhdCI6MTcwMDg0NTI3NiwiZXhwIjoxNzAwODQ4ODc2fQ.lbJ2VJyL2gfdpQr-42_FLlGQTzHnkB-Xw8ocRMWgDbskRiKDCUavhuaNL8JYDOB5Gf18bUixn2lVFu4wX3p4Cw");
+        request.setAction(Action.UNFOLLOW);
+        request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWtlcGF1bDEzIiwiaWF0IjoxNzAxMDIxMTU1LCJleHAiOjE3MDEwMjQ3NTV9.aKg1bokiarJ0H_YNQoOUZO6Gf9rWz772O8gOVfLaHYicsx_imkJyQXKrMAE2fChvCRFm5DtWj0eqSP_37Ecyyg");
         ResponseObject object = createRequest(client, request);
 
     }
