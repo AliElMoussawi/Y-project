@@ -1,5 +1,5 @@
 CREATE TABLE y.Users (
-                         id BIGINT PRIMARY KEY IDENTITY,
+                         UserID BIGINT PRIMARY KEY IDENTITY,
                          username VARCHAR(50) UNIQUE,
                          email VARCHAR(100) UNIQUE,
                          password VARCHAR(100),
@@ -11,14 +11,14 @@ CREATE TABLE y.Users (
 );
 
 CREATE TABLE y.Yaps (
-                        YapID INT PRIMARY KEY IDENTITY,
-                        UserID INT NOT NULL,
-                        Content VARCHAR(280) NOT NULL,
-                        Timestamp DATETIME NOT NULL,
-                        RepostCount INT DEFAULT 0,
-                        LikeCount INT DEFAULT 0,
-                        ReplyCount INT DEFAULT 0,
-                        FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    YapID INT PRIMARY KEY IDENTITY,
+    UserID BIGINT NOT NULL, 
+    Content VARCHAR(280) NOT NULL,
+    Timestamp DATETIME NOT NULL,
+    RepostCount INT DEFAULT 0,
+    LikeCount INT DEFAULT 0,
+    ReplyCount INT DEFAULT 0,
+    FOREIGN KEY (UserID) REFERENCES y.Users(UserID)
 );
 
 CREATE TABLE y.Followers (
