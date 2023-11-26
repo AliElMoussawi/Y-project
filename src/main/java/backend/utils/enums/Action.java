@@ -13,7 +13,6 @@ public enum Action {
     COMMENT,
     REPLY,
     FOLLOW,
-    ACCEPT_FOLLOW,
     UNFOLLOW,
     GET_FOLLOW,
     GET_FOLLOWING,

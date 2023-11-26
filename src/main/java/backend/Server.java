@@ -1,10 +1,8 @@
 package backend;
 
 import backend.middleware.RequestRouter;
-import backend.models.database.User;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
-import backend.services.UserServiceImpl;
 import backend.utils.enums.StatusCode;
 
 
