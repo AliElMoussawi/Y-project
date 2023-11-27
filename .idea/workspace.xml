@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff5c01e6-9a2c-4ea5-be87-1d684c7a7673" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/PostDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/PostRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/PostRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/services/PostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/services/PostServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/EditPostDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/PostRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/PostRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +152,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699893388780</updated>
       <workItem from="1699893389876" duration="5843000" />
-      <workItem from="1701093340507" duration="7011000" />
+      <workItem from="1701093340507" duration="9266000" />
     </task>
     <servers />
   </component>
@@ -192,7 +193,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java</url>
-          <line>62</line>
+          <line>63</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

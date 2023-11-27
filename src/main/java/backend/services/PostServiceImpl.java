@@ -10,4 +10,9 @@ public class PostServiceImpl implements PostService{
     public boolean createPost(long userId, String comment) throws Exception {
         return postRepository.createPost(userId, comment);
     }
+
+    @Override
+    public boolean editPost(long yapId, String comment) throws Exception {
+        return postRepository.editPost(yapId, comment);
+    }
 }

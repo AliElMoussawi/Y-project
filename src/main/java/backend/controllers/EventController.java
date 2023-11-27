@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import backend.dto.EditPostDTO;
 import backend.dto.EventDTO;
 import backend.dto.PostDTO;
 import backend.interfaces.Controller;
@@ -62,6 +63,7 @@ public class EventController implements Controller {
         }
         else if (data instanceof PostDTO)
         {
+            if(request.getAction() == Action.UPLOAD_POST) {
                 PostDTO postDTO = (PostDTO) data;
                 try {
                     if (postService.createPost(postDTO.getUserId(), postDTO.getContent())) {
@@ -72,7 +74,24 @@ public class EventController implements Controller {
                 } catch (Exception e) {
                     return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
                 }
-            } else {
+            }
+        }
+        else if (data instanceof EditPostDTO)
+        {
+            if(request.getAction() == Action.EDIT_POST) {
+                EditPostDTO postDTO = (EditPostDTO) data;
+                try {
+                    if (postService.editPost(postDTO.getYapId(), postDTO.getContent())) {
+                        return new ResponseObject(StatusCode.OK, null, "Post edited successfully");
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to create post");
+                    }
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
+                }
+            }
+        }
+        else {
                 return new ResponseObject(StatusCode.BAD_REQUEST, null, "Invalid data for creating a post");
             }
 

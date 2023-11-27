@@ -1,6 +1,7 @@
 package backend;
 
 import backend.dto.AuthenticationDTO;
+import backend.dto.EditPostDTO;
 import backend.dto.EventDTO;
 import backend.dto.PostDTO;
 import backend.models.protocol.ResponseObject;
@@ -114,10 +115,11 @@ public class Client {
         RequestObject request = new RequestObject();
         //AuthenticationDTO authenticationDTO=new AuthenticationDTO("jakepaul13","jake@prime.com","jake@123");
         //EventDTO authenticationDTO = new EventDTO(1L,-1);
-        PostDTO postDTO = new PostDTO(8, "Hello World from Hanin 2");
+        //EditPostDTO postDTO = new EditPostDTO(2, "Hello World from Hanin 600");
+        EditPostDTO postDTO = new EditPostDTO(3, "Where are you");
         request.setObject(postDTO);
         request.setMethod(Method.POST);
-        request.setAction(Action.UPLOAD_POST);
+        request.setAction(Action.EDIT_POST);
         //request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWtlcGF1bDEzIiwiaWF0IjoxNzAxMDIxMTU1LCJleHAiOjE3MDEwMjQ3NTV9.aKg1bokiarJ0H_YNQoOUZO6Gf9rWz772O8gOVfLaHYicsx_imkJyQXKrMAE2fChvCRFm5DtWj0eqSP_37Ecyyg");
         ResponseObject object = createRequest(client, request);
 
