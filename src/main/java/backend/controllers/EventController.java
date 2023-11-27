@@ -1,11 +1,14 @@
 package backend.controllers;
 
 import backend.dto.EventDTO;
+import backend.dto.PostDTO;
 import backend.interfaces.Controller;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
 import backend.services.FollowService;
 import backend.services.FollowServiceImpl;
+import backend.services.PostService;
+import backend.services.PostServiceImpl;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
 import org.jetbrains.annotations.NotNull;
@@ -14,10 +17,12 @@ import java.util.List;
 
 public class EventController implements Controller {
     FollowService followService = new FollowServiceImpl();
+    PostService postService = new PostServiceImpl();
 
     @Override
     public ResponseObject handleRequest(RequestObject request) {
         Object data = request.getObject();
+
         if (data instanceof EventDTO) {
             EventDTO credentials = (EventDTO) data;
             long followerId=credentials.getFollowerId();
@@ -55,6 +60,22 @@ public class EventController implements Controller {
                 }
             }
         }
+        else if (data instanceof PostDTO)
+        {
+                PostDTO postDTO = (PostDTO) data;
+                try {
+                    if (postService.createPost(postDTO.getUserId(), postDTO.getContent())) {
+                        return new ResponseObject(StatusCode.OK, null, "Post created successfully");
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to create post");
+                    }
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
+                }
+            } else {
+                return new ResponseObject(StatusCode.BAD_REQUEST, null, "Invalid data for creating a post");
+            }
+
         return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with EventController");
     }
 

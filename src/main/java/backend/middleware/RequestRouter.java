@@ -33,6 +33,7 @@ public class RequestRouter {
         controllers.put(Action.UNFOLLOW,new EventController());
         controllers.put(Action.GET_FOLLOWING, new EventController());
         controllers.put(Action.GET_FOLLOWERS, new EventController());
+        controllers.put(Action.UPLOAD_POST, new EventController());
     }
 
     public ResponseObject routeRequest(RequestObject request) {
