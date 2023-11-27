@@ -5,12 +5,13 @@ import backend.dto.PostDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PostRepositoryImpl implements PostRepository {
 
-    public PostDTO findById(long id) {
-        String sql = "SELECT * FROM Posts WHERE id = ?";
+    public PostDTO getPostById(int id) {
+        String sql = "SELECT * FROM y.Yaps WHERE yapId = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
@@ -27,8 +28,8 @@ public class PostRepositoryImpl implements PostRepository {
         return null;
     }
 
-    public List<PostDTO> findByUserId(long userId) {
-        String sql = "SELECT * FROM Posts WHERE userId = ?";
+    public List<PostDTO> getPostByUserId(int userId) {
+        String sql = "SELECT * FROM y.Yaps WHERE userId = ?";
         List<PostDTO> posts = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -46,9 +47,14 @@ public class PostRepositoryImpl implements PostRepository {
         return posts;
     }
 
+    @Override
+    public List<PostDTO> getPostsForFollowers(int userId) {
+        return null;
+    }
 
-    private boolean insertPost(PostDTO post) {
-        String sql = "INSERT INTO Posts (userId, content, timestamp) VALUES (?, ?, ?)";
+
+    public boolean insertPost(PostDTO post) {
+        String sql = "INSERT INTO y.Yaps (userId, content, timestamp) VALUES (?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -63,13 +69,13 @@ public class PostRepositoryImpl implements PostRepository {
         return false;
     }
 
-    private boolean updatePost(PostDTO post) {
-        String sql = "UPDATE Posts SET userId = ?, content = ?, timestamp = ? WHERE id = ?";
+    public boolean updatePost(PostDTO post) {
+        String sql = "UPDATE y.Yaps SET userId = ?, content = ?, timestamp = ? WHERE id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             setPostPreparedStatement(preparedStatement, post);
-            preparedStatement.setLong(4, post.getId());
+            preparedStatement.setLong(4, post.getYapId());
 
             preparedStatement.executeUpdate();
             return true;
@@ -78,33 +84,49 @@ public class PostRepositoryImpl implements PostRepository {
         }
         return false;
     }
-    public List<PostDTO> findPostsForFollowers(long userId) {
-        // Assuming you have a FollowersRepository to manage followers
-        FollowersRepository followersRepository = new FollowersRepositoryImpl();
-        List<Long> followerIds = followersRepository.findFollowerIds(userId);
+    public boolean deletePost(PostDTO post) {
+        if (post.getYapId() == 0) {
+            System.out.println("Cannot delete post without ID.");
+            return false;
+        }
 
-        // Fetch posts for the user and their followers
-        String sql = "SELECT * FROM Posts WHERE userId IN (" + String.join(",", Collections.nCopies(followerIds.size(), "?")) + ") ORDER BY timestamp DESC";
-        List<PostDTO> posts = new ArrayList<>();
+        String sql = "DELETE FROM Posts WHERE id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            for (int i = 0; i < followerIds.size(); i++) {
-                preparedStatement.setLong(i + 1, followerIds.get(i));
-            }
+            preparedStatement.setLong(1, post.getYapId());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    posts.add(extractPostFromResultSet(resultSet));
-                }
-            }
+            int affectedRows = preparedStatement.executeUpdate();
+            return affectedRows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return posts;
+        return false;
     }
-
-
+//    public List<PostDTO> findPostsForFollowers(long userId) {
+//        FollowersRepository followersRepository = new FollowersRepositoryImpl();
+//        List<Long> followerIds = followersRepository.findFollowerIds(userId);
+//
+//        // Fetch posts for the user and their followers
+//        String sql = "SELECT * FROM Posts WHERE userId IN (" + String.join(",", Collections.nCopies(followerIds.size(), "?")) + ") ORDER BY timestamp DESC";
+//        List<PostDTO> posts = new ArrayList<>();
+//        try (Connection connection = DatabaseConnection.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+//
+//            for (int i = 0; i < followerIds.size(); i++) {
+//                preparedStatement.setLong(i + 1, followerIds.get(i));
+//            }
+//
+//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                while (resultSet.next()) {
+//                    posts.add(extractPostFromResultSet(resultSet));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return posts;
+//    }
 
     private void setPostPreparedStatement(PreparedStatement preparedStatement, PostDTO post) throws SQLException {
         preparedStatement.setLong(1, post.getUserId());
@@ -116,16 +138,16 @@ public class PostRepositoryImpl implements PostRepository {
         if (affectedRows > 0) {
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    post.setId(generatedKeys.getLong(1));
+                    post.setYapId((int) generatedKeys.getLong(1));
                 }
             }
         }
     }
 
     private PostDTO extractPostFromResultSet(ResultSet resultSet) throws SQLException {
-        Post post = new Post();
-        post.setId(resultSet.getLong("id"));
-        post.setUserId(resultSet.getLong("userId"));
+        PostDTO post = new PostDTO();
+        post.setYapId((int) resultSet.getLong("id"));
+        post.setUserId((int) resultSet.getLong("userId"));
         post.setContent(resultSet.getString("content"));
         post.setTimestamp(resultSet.getTimestamp("timestamp").toInstant());
 
