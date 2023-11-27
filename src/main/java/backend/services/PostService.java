@@ -8,4 +8,6 @@ public interface PostService {
     boolean removePost(long yapId) throws Exception;
 
     boolean likePost(long userId, long yapId) throws Exception;
+
+    boolean unlikePost(long userId, long yapId) throws Exception;
 }

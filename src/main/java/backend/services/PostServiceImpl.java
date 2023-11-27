@@ -27,4 +27,10 @@ public class PostServiceImpl implements PostService{
     {
         return postRepository.likePost(userId,yapId);
     }
+
+    @Override
+    public boolean unlikePost(long userId,long yapId) throws Exception
+    {
+        return postRepository.unlikePost(userId,yapId);
+    }
 }

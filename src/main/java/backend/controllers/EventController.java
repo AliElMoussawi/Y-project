@@ -118,6 +118,18 @@ public class EventController implements Controller {
                     return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
                 }
             }
+            else if (request.getAction() == Action.UNLIKE_POST){
+                LikeDTO postDTO = (LikeDTO) data;
+                try {
+                    if (postService.unlikePost(postDTO.getUserId(), postDTO.getYapId())) {
+                        return new ResponseObject(StatusCode.OK, null, "Post unliked successfully");
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to unlike post");
+                    }
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
+                }
+            }
         }
         else {
                 return new ResponseObject(StatusCode.BAD_REQUEST, null, "Invalid data for creating a post");

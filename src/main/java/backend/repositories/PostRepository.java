@@ -8,4 +8,6 @@ public interface PostRepository {
     boolean removePost(long yapId);
 
     boolean likePost(long userId, long yapId);
+
+    boolean unlikePost(long userId, long yapId);
 }
