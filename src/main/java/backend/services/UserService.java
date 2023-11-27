@@ -1,6 +1,6 @@
 package backend.services;
 
-import backend.models.database.User;
+import backend.repositories.models.database.User;
 
 public interface UserService {
     User getUserById(int id);

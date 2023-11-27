@@ -2,8 +2,8 @@ package frontend;
 
 import backend.Client;
 import backend.dto.AuthenticationDTO;
-import backend.models.protocol.RequestObject;
-import backend.models.protocol.ResponseObject;
+import backend.repositories.models.protocol.RequestObject;
+import backend.repositories.models.protocol.ResponseObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
 import backend.utils.enums.StatusCode;
@@ -45,11 +45,17 @@ public class LoginUI extends JDialog {
         if(responseObject.getStatusCode() == StatusCode.OK){
             String token = String.valueOf(responseObject.getObject());
             // navigate to the second page we can pass the token as argument
+            openHomePage(client, token);
         }
         usernameOrEmail.setText("");
         passwordInput.setText("");
     }
-
+    public static void openHomePage(Client client, String token){
+        SwingUtilities.invokeLater(() -> {
+            HomePage twitterHomePage = new HomePage(client, token);
+            twitterHomePage.setVisible(true);
+        });
+    }
     public static void main(String[] args) {
         Client client = new Client("127.0.0.1", 9991, 1);
         LoginUI dialog = new LoginUI(client);

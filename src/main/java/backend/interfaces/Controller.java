@@ -1,7 +1,7 @@
 package backend.interfaces;
 
-import backend.models.protocol.RequestObject;
-import backend.models.protocol.ResponseObject;
+import backend.repositories.models.protocol.RequestObject;
+import backend.repositories.models.protocol.ResponseObject;
 
 public interface Controller {
     ResponseObject handleRequest(RequestObject request);

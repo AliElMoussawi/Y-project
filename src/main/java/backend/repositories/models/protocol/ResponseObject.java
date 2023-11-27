@@ -1,4 +1,4 @@
-package backend.models.protocol;
+package backend.repositories.models.protocol;
 
 import backend.utils.enums.StatusCode;
 import lombok.*;

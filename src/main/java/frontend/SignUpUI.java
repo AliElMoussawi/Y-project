@@ -2,8 +2,8 @@ package frontend;
 
 import backend.Client;
 import backend.dto.AuthenticationDTO;
-import backend.models.protocol.RequestObject;
-import backend.models.protocol.ResponseObject;
+import backend.repositories.models.protocol.RequestObject;
+import backend.repositories.models.protocol.ResponseObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
 import backend.utils.enums.StatusCode;
@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static backend.Client.createRequest;
+import static frontend.LoginUI.openHomePage;
 
 public class SignUpUI extends JDialog {
     private JPanel contentPane;
@@ -45,10 +46,11 @@ public class SignUpUI extends JDialog {
         requestObject.setAction(Action.SIGNUP);
         requestObject.setObject(authenticationDTO);
         requestObject.setMethod(Method.POST);
+        requestObject.setId("signup1");
         ResponseObject responseObject = createRequest(client, requestObject);
         if(responseObject.getStatusCode() == StatusCode.OK){
             String token = String.valueOf(responseObject.getObject());
-            // navigate to the second page we can pass the token as argument
+            openHomePage(client, token);
         }
         usernameInput.setText("");
         emailInput.setText("");

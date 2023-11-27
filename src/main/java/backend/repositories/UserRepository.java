@@ -1,6 +1,6 @@
 package backend.repositories;
 
-import backend.models.database.User;
+import backend.repositories.models.database.User;
 
 public interface UserRepository {
     User findById(long id);

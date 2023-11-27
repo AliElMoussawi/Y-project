@@ -1,7 +1,7 @@
 package backend.middleware;
 
 import backend.security.Token;
-import backend.models.protocol.RequestObject;
+import backend.repositories.models.protocol.RequestObject;
 import backend.utils.enums.Action;
 import org.jetbrains.annotations.NotNull;
 
