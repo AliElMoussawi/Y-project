@@ -1,4 +1,4 @@
-package backend.repositories.models.database;
+package backend.models.database;
 
 import lombok.Getter;
 import lombok.Setter;

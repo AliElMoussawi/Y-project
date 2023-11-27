@@ -2,8 +2,8 @@ package frontend;
 
 import backend.Client;
 import backend.dto.AuthenticationDTO;
-import backend.repositories.models.protocol.RequestObject;
-import backend.repositories.models.protocol.ResponseObject;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.ResponseObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
 import backend.utils.enums.StatusCode;

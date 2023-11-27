@@ -1,7 +1,7 @@
 package backend.repositories;
 
 import backend.configuration.DatabaseConnection;
-import backend.repositories.models.database.User;
+import backend.models.database.User;
 
 import java.sql.*;
 

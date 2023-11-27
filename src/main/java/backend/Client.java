@@ -1,9 +1,9 @@
 package backend;
 
 import backend.dto.AuthenticationDTO;
-import backend.repositories.models.protocol.ResponseObject;
-import backend.repositories.models.protocol.RequestObject;
-import backend.repositories.models.protocol.SocketObject;
+import backend.models.protocol.ResponseObject;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.SocketObject;
 import backend.utils.enums.Action;
 import backend.utils.enums.Method;
 import org.jetbrains.annotations.NotNull;

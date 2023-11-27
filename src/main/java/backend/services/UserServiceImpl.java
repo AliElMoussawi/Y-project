@@ -1,6 +1,6 @@
 package backend.services;
 
-import backend.repositories.models.database.User;
+import backend.models.database.User;
 import backend.repositories.UserRepository;
 import backend.repositories.UserRepositoryImpl;
 import backend.security.Token;
