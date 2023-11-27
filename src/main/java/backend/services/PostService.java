@@ -6,4 +6,6 @@ public interface PostService {
     boolean editPost(long yapId, String comment) throws Exception;
 
     boolean removePost(long yapId) throws Exception;
+
+    boolean likePost(long userId, long yapId) throws Exception;
 }

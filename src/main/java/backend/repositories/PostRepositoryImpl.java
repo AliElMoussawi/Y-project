@@ -55,4 +55,21 @@ public class PostRepositoryImpl implements PostRepository{
         return false;
     }
 
+    public boolean likePost(long userId, long yapId){
+        String sql = "{call y.spLikePost(?,?)}";
+        try (java.sql.Connection connection = DatabaseConnection.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(sql)) {
+
+            callableStatement.setLong(1, userId);
+            callableStatement.setLong(2, yapId);
+
+            int rowsAffected = callableStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

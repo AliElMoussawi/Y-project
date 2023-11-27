@@ -2,6 +2,7 @@ package backend.controllers;
 
 import backend.dto.EditPostDTO;
 import backend.dto.EventDTO;
+import backend.dto.LikeDTO;
 import backend.dto.PostDTO;
 import backend.interfaces.Controller;
 import backend.models.protocol.RequestObject;
@@ -97,6 +98,21 @@ public class EventController implements Controller {
                         return new ResponseObject(StatusCode.OK, null, "Post deleted successfully");
                     } else {
                         return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to delete post");
+                    }
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
+                }
+            }
+        }
+        else if (data instanceof LikeDTO)
+        {
+            if (request.getAction() == Action.LIKE_POST){
+                LikeDTO postDTO = (LikeDTO) data;
+                try {
+                    if (postService.likePost(postDTO.getUserId(), postDTO.getYapId())) {
+                        return new ResponseObject(StatusCode.OK, null, "Post liked successfully");
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to like post");
                     }
                 } catch (Exception e) {
                     return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");

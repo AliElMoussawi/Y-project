@@ -21,4 +21,10 @@ public class PostServiceImpl implements PostService{
     {
         return postRepository.removePost(yapId);
     }
+
+    @Override
+    public boolean likePost(long userId,long yapId) throws Exception
+    {
+        return postRepository.likePost(userId,yapId);
+    }
 }
