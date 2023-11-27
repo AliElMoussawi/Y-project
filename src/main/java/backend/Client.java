@@ -112,11 +112,11 @@ public class Client {
 
         RequestObject request = new RequestObject();
         //AuthenticationDTO authenticationDTO=new AuthenticationDTO("jakepaul13","jake@prime.com","jake@123");
-        EventDTO authenticationDTO = new EventDTO("jakepaul13","loganpaul13");
+        EventDTO authenticationDTO = new EventDTO(3L,-1);
         request.setObject(authenticationDTO);
         request.setMethod(Method.POST);
-        request.setAction(Action.UNFOLLOW);
-        request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWtlcGF1bDEzIiwiaWF0IjoxNzAxMDIxMTU1LCJleHAiOjE3MDEwMjQ3NTV9.aKg1bokiarJ0H_YNQoOUZO6Gf9rWz772O8gOVfLaHYicsx_imkJyQXKrMAE2fChvCRFm5DtWj0eqSP_37Ecyyg");
+        request.setAction(Action.GET_FOLLOWING);
+        //request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWtlcGF1bDEzIiwiaWF0IjoxNzAxMDIxMTU1LCJleHAiOjE3MDEwMjQ3NTV9.aKg1bokiarJ0H_YNQoOUZO6Gf9rWz772O8gOVfLaHYicsx_imkJyQXKrMAE2fChvCRFm5DtWj0eqSP_37Ecyyg");
         ResponseObject object = createRequest(client, request);
 
     }

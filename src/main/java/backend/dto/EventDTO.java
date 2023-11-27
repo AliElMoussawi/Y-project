@@ -13,5 +13,5 @@ import java.io.Serializable;
 public class EventDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private long followerId;
-    private long toFollowId;
+    private long  toFollowId;
 }

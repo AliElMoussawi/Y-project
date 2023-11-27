@@ -7,14 +7,14 @@
     <list default="true" id="ff5c01e6-9a2c-4ea5-be87-1d684c7a7673" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/interfaces/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/interfaces/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dto/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/dto/EventDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/FollowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/FollowService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/FollowServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/FollowServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +50,7 @@
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "FollowUtilities",
     "go.import.settings.migrated": "true",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/my-dev/y-prototype",
@@ -60,6 +60,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/my-dev/y-project/y-project/src/main/java/org/y/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
@@ -67,7 +70,7 @@
   <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="backend.Client" />
-      <module name="Proj" />
+      <module name="y-project" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="backend.*" />
@@ -106,7 +109,7 @@
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="backend.Server" />
-      <module name="Proj" />
+      <module name="y-project" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="backend.*" />
@@ -149,6 +152,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699893388780</updated>
       <workItem from="1699893389876" duration="5843000" />
+      <workItem from="1701093340507" duration="1730000" />
     </task>
     <servers />
   </component>
@@ -176,6 +180,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/backend/Main.java</url>
           <line>15</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/backend/Client.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/backend/Client.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

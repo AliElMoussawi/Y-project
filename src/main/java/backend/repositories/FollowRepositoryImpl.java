@@ -1,9 +1,10 @@
 package backend.repositories;
 
 import backend.configuration.DatabaseConnection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FollowRepositoryImpl implements FollowRepository {
 
@@ -62,4 +63,28 @@ public class FollowRepositoryImpl implements FollowRepository {
         }
         return false;
     }
+
+    public List<String> getFollowing(long userId) {
+        List<String> usernames = new ArrayList<>();
+        String sql = "{call y.getFollowing(?)}";
+        try (Connection connection = DatabaseConnection.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(sql)) {
+
+            callableStatement.setLong(1, userId);
+
+            try (ResultSet resultSet = callableStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    usernames.add(resultSet.getString("username"));
+                }
+            }
+            return usernames;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usernames;
+    }
+
+
+
 }

@@ -31,6 +31,7 @@ public class RequestRouter {
         controllers.put(Action.SIGNUP, new AuthenticationController());
         controllers.put(Action.FOLLOW,new EventController());
         controllers.put(Action.UNFOLLOW,new EventController());
+        controllers.put(Action.GET_FOLLOWING, new EventController());
     }
 
     public ResponseObject routeRequest(RequestObject request) {

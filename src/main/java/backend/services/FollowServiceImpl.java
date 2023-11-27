@@ -6,6 +6,8 @@ import backend.repositories.FollowRepositoryImpl;
 import backend.repositories.UserRepository;
 import backend.repositories.UserRepositoryImpl;
 
+import java.util.List;
+
 public class FollowServiceImpl implements FollowService {
 
     static FollowRepository followRepository = new FollowRepositoryImpl();
@@ -36,6 +38,14 @@ public class FollowServiceImpl implements FollowService {
         return true;
     }
 
+    @Override
+    public List<String> getFollowing(long user) throws Exception {
+        try {
+            return followRepository.getFollowing(user);
+        } catch (Exception e) {
+            throw new Exception("Error while retrieving following users", e);
+        }
+    }
 
     public boolean removeFollow(long user, long user_to_unfollow) throws Exception {
         return deleteRelationship(user, user_to_unfollow);

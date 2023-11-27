@@ -10,6 +10,8 @@ import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class EventController implements Controller {
     FollowService followService = new FollowServiceImpl();
 
@@ -19,7 +21,7 @@ public class EventController implements Controller {
         if (data instanceof EventDTO) {
             EventDTO credentials = (EventDTO) data;
             long followerId=credentials.getFollowerId();
-            long usertoFollowID = credentials.getToFollowId();
+            Long usertoFollowID = credentials.getToFollowId();
             if (request.getAction() == Action.FOLLOW) {
                 return createFollow(usertoFollowID, followerId);
             } else if (request.getAction() == Action.UNFOLLOW) {
@@ -34,6 +36,14 @@ public class EventController implements Controller {
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
+                }
+            }
+            else if (request.getAction() == Action.GET_FOLLOWING) {
+                try {
+                    List<String> followingUsernames = followService.getFollowing(followerId);
+                    return new ResponseObject(StatusCode.OK, followingUsernames, "Following users retrieved successfully");
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while retrieving following users");
                 }
             }
         }
