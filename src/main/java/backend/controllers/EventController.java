@@ -6,54 +6,51 @@ import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
 import backend.services.FollowService;
 import backend.services.FollowServiceImpl;
-import backend.services.UserServiceImpl;
-import backend.services.UserServiceImpl;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
+import org.jetbrains.annotations.NotNull;
 
 public class EventController implements Controller {
-    FollowService followService=new FollowServiceImpl();
+    FollowService followService = new FollowServiceImpl();
 
     @Override
-    public ResponseObject handleRequest(RequestObject request) throws Exception {
+    public ResponseObject handleRequest(RequestObject request) {
         Object data = request.getObject();
-        if (request.getAction() == Action.FOLLOW) {
-            if (data instanceof EventDTO) {
-
-                EventDTO credentials = (EventDTO) data;
-                String user=credentials.getFollowerUsername();
-                String user_to_follow=credentials.getFollowedUser();
-
-                if (followService.getUserByUsernameOrEmail(user_to_follow)==null) {
-                    return new ResponseObject(StatusCode.NOT_FOUND, null, "An error occurred with retrieving the user_to_follow");
-                }
-                else if(followService.createRelationship(user,user_to_follow)){
-                    return new ResponseObject(StatusCode.OK, null, "Followed User " + user_to_follow);
-
-                }
-                else {
-                    return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with Follow");
-                }
-            }
-        }
-        else if(request.getAction()==Action.UNFOLLOW){
-            if (data instanceof EventDTO){
-                EventDTO credentials = (EventDTO) data;
-                String user=credentials.getFollowerUsername();
-                String user_to_follow=credentials.getFollowedUser();
-
-                if (followService.getUserByUsernameOrEmail(user_to_follow)==null) {
-                    return new ResponseObject(StatusCode.NOT_FOUND, null, "An error occurred with retrieving the user_to_follow");
-                }
-                else if(followService.removerRelationship(user,user_to_follow)){
-                    return new ResponseObject(StatusCode.OK, null, "UnFollowed User " + user_to_follow);
-                }
-                else {
-                    return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with Unfollow");
+        if (data instanceof EventDTO) {
+            EventDTO credentials = (EventDTO) data;
+            long followerId=credentials.getFollowerId();
+            long usertoFollowID = credentials.getToFollowId();
+            if (request.getAction() == Action.FOLLOW) {
+                return createFollow(usertoFollowID, followerId);
+            } else if (request.getAction() == Action.UNFOLLOW) {
+                try {
+                    if(!followService.checkFollow(followerId,usertoFollowID)){
+                        return new ResponseObject(StatusCode.OK, null, "You have no relationship with the user");
+                    }
+                    else if (followService.removeFollow(followerId, usertoFollowID)) {
+                        return new ResponseObject(StatusCode.OK, null, "UnFollowed User " + usertoFollowID);
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with unfollow");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
         return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with EventController");
+    }
 
+    @NotNull
+    private ResponseObject createFollow(long usertoFollowID, long follower_id) {
+        try {
+            if (followService.createFollow(follower_id, usertoFollowID)) {
+                return new ResponseObject(StatusCode.OK, null, "Followed User " + usertoFollowID);
+
+            } else {
+                return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with Follow");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

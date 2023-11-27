@@ -33,7 +33,7 @@ public class RequestRouter {
         controllers.put(Action.UNFOLLOW,new EventController());
     }
 
-    public ResponseObject routeRequest(RequestObject request) throws Exception {
+    public ResponseObject routeRequest(RequestObject request) {
         if (!interceptor.validRequest(request)) {
             return new ResponseObject(StatusCode.UNAUTHORIZED, null, "Invalid token or request");
         }

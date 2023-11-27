@@ -5,7 +5,6 @@ import backend.repositories.UserRepository;
 import backend.repositories.UserRepositoryImpl;
 import backend.security.Token;
 
-import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository = new UserRepositoryImpl();
@@ -14,15 +13,9 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl() {
     }
 
-    public User getUserById(int id) {
-        return userRepository.findById(id);
-    }
-
     public User getUserByUsernameOrEmail(String usernameOrEmail) {
         return userRepository.findByUsernameOrEmail(usernameOrEmail);
     }
-
-
     public String authenticate(String usernameOrEmail, String password) throws Exception {
         User user = getUserByUsernameOrEmail(usernameOrEmail);
         if (user == null) {
@@ -33,7 +26,6 @@ public class UserServiceImpl implements UserService {
         }
         return token.createToken(usernameOrEmail);
     }
-
     public String createUser(User user) throws Exception {
         if(getUserByUsernameOrEmail(user.getUsername()) != null) {
             throw new Exception("Username already exist");
@@ -46,6 +38,4 @@ public class UserServiceImpl implements UserService {
         }
         throw new Exception("Error while creating the account");
     }
-
-
 }

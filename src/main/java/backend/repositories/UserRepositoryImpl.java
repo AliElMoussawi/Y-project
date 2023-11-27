@@ -105,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
-    private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
+    public User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong("UserID"));
         user.setUsername(resultSet.getString("username"));

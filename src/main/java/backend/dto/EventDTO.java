@@ -12,6 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class EventDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String followerUsername;
-    private String followedUser;
+    private long followerId;
+    private long toFollowId;
 }
