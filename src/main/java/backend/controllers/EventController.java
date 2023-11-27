@@ -5,6 +5,7 @@ import backend.dto.EventDTO;
 import backend.dto.LikeDTO;
 import backend.dto.PostDTO;
 import backend.interfaces.Controller;
+import backend.models.database.Post;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
 import backend.services.FollowService;
@@ -59,6 +60,19 @@ public class EventController implements Controller {
                     return new ResponseObject(StatusCode.OK, followingUsernames, "Following users retrieved successfully");
                 } catch (Exception e) {
                     return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while retrieving following users");
+                }
+            }
+            else if (request.getAction() == Action.GET_POST){
+                try {
+                    if (data instanceof EventDTO) {
+                        EventDTO eventDTO = (EventDTO) data;
+                        List<Post> posts = postService.getPosts(eventDTO.getFollowerId());
+                        return new ResponseObject(StatusCode.OK, posts, "Posts retrieved successfully");
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Invalid data for retrieving posts");
+                    }
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while retrieving posts");
                 }
             }
         }
@@ -131,6 +145,9 @@ public class EventController implements Controller {
                 }
             }
         }
+
+
+
         else {
                 return new ResponseObject(StatusCode.BAD_REQUEST, null, "Invalid data for creating a post");
             }

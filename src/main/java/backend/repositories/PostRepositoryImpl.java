@@ -1,10 +1,11 @@
 package backend.repositories;
 
 import backend.configuration.DatabaseConnection;
+import backend.models.database.Post;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostRepositoryImpl implements PostRepository{
     public boolean createPost(long userId, String comment) {
@@ -88,5 +89,33 @@ public class PostRepositoryImpl implements PostRepository{
         }
         return false;
     }
+    @Override
+    public List<Post> getPosts(long userId) {
+        List<Post> posts = new ArrayList<>();
+        String sql = "{call y.spGetPosts(?)}";
+        try (Connection connection = DatabaseConnection.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(sql)) {
 
+            callableStatement.setLong(1, userId);
+
+            try (ResultSet resultSet = callableStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setYapId(resultSet.getInt("yapId"));
+                    post.setUserId(resultSet.getInt("userId"));
+                    post.setContent(resultSet.getString("content"));
+                    post.setTimeStamp(resultSet.getTimestamp("timeStamp"));
+                    post.setRepostCount(resultSet.getInt("repostCount"));
+                    post.setLikeCount(resultSet.getInt("likeCount"));
+                    post.setReplyCount(resultSet.getInt("replyCount"));
+                    posts.add(post);
+                }
+            }
+
+            return posts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
 }

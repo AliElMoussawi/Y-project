@@ -1,7 +1,10 @@
 package backend.services;
 
+import backend.models.database.Post;
 import backend.repositories.PostRepository;
 import backend.repositories.PostRepositoryImpl;
+
+import java.util.List;
 
 public class PostServiceImpl implements PostService{
     private PostRepository postRepository = new PostRepositoryImpl();
@@ -32,5 +35,11 @@ public class PostServiceImpl implements PostService{
     public boolean unlikePost(long userId,long yapId) throws Exception
     {
         return postRepository.unlikePost(userId,yapId);
+    }
+
+    @Override
+    public List<Post> getPosts(long userId) throws Exception
+    {
+        return postRepository.getPosts(userId);
     }
 }

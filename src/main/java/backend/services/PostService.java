@@ -1,5 +1,9 @@
 package backend.services;
 
+import backend.models.database.Post;
+
+import java.util.List;
+
 public interface PostService {
     boolean createPost(long userId, String comment) throws Exception;
 
@@ -10,4 +14,6 @@ public interface PostService {
     boolean likePost(long userId, long yapId) throws Exception;
 
     boolean unlikePost(long userId, long yapId) throws Exception;
+
+    List<Post> getPosts(long userid) throws Exception;
 }
