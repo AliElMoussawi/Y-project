@@ -11,10 +11,11 @@ public enum Action {
     UNLIKE_POST,
     REPOST,
     COMMENT,
+    UNCOMMENT,
     REPLY,
     FOLLOW,
     UNFOLLOW,
-    GET_FOLLOW,
+    GET_FOLLOWERS,
     GET_FOLLOWING,
     GET_PROFILE,
     EDIT_PROFILE;
@@ -28,3 +29,6 @@ public enum Action {
         }
     }
 }
+
+
+//  11/17
