@@ -1,6 +1,7 @@
 package backend.middleware;
 
 import backend.controllers.AuthenticationController;
+import backend.controllers.EventController;
 import backend.interfaces.Controller;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
@@ -28,7 +29,18 @@ public class RequestRouter {
         // Initialize controllers for each action
         controllers.put(Action.LOGIN, new AuthenticationController());
         controllers.put(Action.SIGNUP, new AuthenticationController());
-
+        controllers.put(Action.FOLLOW,new EventController());
+        controllers.put(Action.UNFOLLOW,new EventController());
+        controllers.put(Action.GET_FOLLOWING, new EventController());
+        controllers.put(Action.GET_FOLLOWERS, new EventController());
+        controllers.put(Action.UPLOAD_POST, new EventController());
+        controllers.put(Action.EDIT_POST, new EventController());
+        controllers.put(Action.DELETE_POST, new EventController());
+        controllers.put(Action.LIKE_POST, new EventController());
+        controllers.put(Action.UNLIKE_POST, new EventController());
+        controllers.put(Action.GET_POST, new EventController());
+        controllers.put(Action.COMMENT,new EventController());
+        controllers.put(Action.UNCOMMENT,new EventController());
     }
 
     public ResponseObject routeRequest(RequestObject request) {
