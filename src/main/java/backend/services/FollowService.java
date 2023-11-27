@@ -9,5 +9,5 @@ public interface FollowService {
 
     List<String> getFollowing(long user) throws Exception;
 
-
+    List<String> getFollowers(long user) throws Exception;
 }

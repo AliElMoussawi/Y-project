@@ -85,6 +85,25 @@ public class FollowRepositoryImpl implements FollowRepository {
         return usernames;
     }
 
+    public List<String> getFollowers(long userId) {
+        List<String> usernames = new ArrayList<>();
+        String sql = "{call y.getFollowers(?)}";
+        try (Connection connection = DatabaseConnection.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(sql)) {
 
+            callableStatement.setLong(1, userId);
+
+            try (ResultSet resultSet = callableStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    usernames.add(resultSet.getString("username"));
+                }
+            }
+            return usernames;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usernames;
+    }
 
 }

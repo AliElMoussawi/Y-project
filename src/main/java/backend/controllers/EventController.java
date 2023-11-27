@@ -46,6 +46,14 @@ public class EventController implements Controller {
                     return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while retrieving following users");
                 }
             }
+            else if (request.getAction() == Action.GET_FOLLOWERS) {
+                try {
+                    List<String> followingUsernames = followService.getFollowers(followerId);
+                    return new ResponseObject(StatusCode.OK, followingUsernames, "Following users retrieved successfully");
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while retrieving following users");
+                }
+            }
         }
         return new ResponseObject(StatusCode.BAD_REQUEST, null, "An error occurred with EventController");
     }

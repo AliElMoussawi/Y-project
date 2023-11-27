@@ -5,16 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff5c01e6-9a2c-4ea5-be87-1d684c7a7673" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/controllers/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dto/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/dto/EventDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/middleware/RequestRouter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/FollowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/FollowService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/services/FollowServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/services/FollowServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +151,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699893388780</updated>
       <workItem from="1699893389876" duration="5843000" />
-      <workItem from="1701093340507" duration="1730000" />
+      <workItem from="1701093340507" duration="3049000" />
     </task>
     <servers />
   </component>
@@ -182,14 +181,23 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/backend/Client.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/main/java/backend/repositories/FollowRepositoryImpl.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/backend/Client.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/main/java/backend/utils/enums/Action.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/backend/services/FollowServiceImpl.java</url>
+          <line>49</line>
+          <properties class="backend.services.FollowServiceImpl" method="getFollowers">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

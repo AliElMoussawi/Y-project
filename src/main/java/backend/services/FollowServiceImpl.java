@@ -46,7 +46,14 @@ public class FollowServiceImpl implements FollowService {
             throw new Exception("Error while retrieving following users", e);
         }
     }
-
+    @Override
+    public List<String> getFollowers(long user) throws Exception {
+        try {
+            return followRepository.getFollowers(user);
+        } catch (Exception e) {
+            throw new Exception("Error while retrieving following users", e);
+        }
+    }
     public boolean removeFollow(long user, long user_to_unfollow) throws Exception {
         return deleteRelationship(user, user_to_unfollow);
     }

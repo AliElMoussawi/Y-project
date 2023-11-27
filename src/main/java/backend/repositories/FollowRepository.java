@@ -11,4 +11,6 @@ public interface FollowRepository {
 
     List<String> getFollowing(long user);
 
+    List<String> getFollowers(long user);
+
 }

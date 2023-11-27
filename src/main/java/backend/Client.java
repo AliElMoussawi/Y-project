@@ -112,7 +112,7 @@ public class Client {
 
         RequestObject request = new RequestObject();
         //AuthenticationDTO authenticationDTO=new AuthenticationDTO("jakepaul13","jake@prime.com","jake@123");
-        EventDTO authenticationDTO = new EventDTO(3L,-1);
+        EventDTO authenticationDTO = new EventDTO(1L,-1);
         request.setObject(authenticationDTO);
         request.setMethod(Method.POST);
         request.setAction(Action.GET_FOLLOWING);

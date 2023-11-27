@@ -14,7 +14,7 @@ public enum Action {
     REPLY,
     FOLLOW,
     UNFOLLOW,
-    GET_FOLLOW,
+    GET_FOLLOWERS,
     GET_FOLLOWING,
     GET_PROFILE,
     EDIT_PROFILE;
