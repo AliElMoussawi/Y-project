@@ -40,5 +40,19 @@ public class PostRepositoryImpl implements PostRepository{
         return false;
     }
 
+    public boolean removePost(long yapId) {
+        String sql = "{call y.spRemovePost(?)}";
+        try (java.sql.Connection connection = DatabaseConnection.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(sql)) {
+
+            callableStatement.setLong(1, yapId);
+            int rowsAffected = callableStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

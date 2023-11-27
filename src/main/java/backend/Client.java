@@ -116,10 +116,10 @@ public class Client {
         //AuthenticationDTO authenticationDTO=new AuthenticationDTO("jakepaul13","jake@prime.com","jake@123");
         //EventDTO authenticationDTO = new EventDTO(1L,-1);
         //EditPostDTO postDTO = new EditPostDTO(2, "Hello World from Hanin 600");
-        EditPostDTO postDTO = new EditPostDTO(3, "Where are you");
+        EditPostDTO postDTO = new EditPostDTO(1,"");
         request.setObject(postDTO);
         request.setMethod(Method.POST);
-        request.setAction(Action.EDIT_POST);
+        request.setAction(Action.DELETE_POST);
         //request.setToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWtlcGF1bDEzIiwiaWF0IjoxNzAxMDIxMTU1LCJleHAiOjE3MDEwMjQ3NTV9.aKg1bokiarJ0H_YNQoOUZO6Gf9rWz772O8gOVfLaHYicsx_imkJyQXKrMAE2fChvCRFm5DtWj0eqSP_37Ecyyg");
         ResponseObject object = createRequest(client, request);
 

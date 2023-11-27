@@ -15,4 +15,10 @@ public class PostServiceImpl implements PostService{
     public boolean editPost(long yapId, String comment) throws Exception {
         return postRepository.editPost(yapId, comment);
     }
+
+    @Override
+    public boolean removePost(long yapId) throws Exception
+    {
+        return postRepository.removePost(yapId);
+    }
 }

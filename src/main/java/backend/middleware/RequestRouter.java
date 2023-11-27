@@ -35,6 +35,7 @@ public class RequestRouter {
         controllers.put(Action.GET_FOLLOWERS, new EventController());
         controllers.put(Action.UPLOAD_POST, new EventController());
         controllers.put(Action.EDIT_POST, new EventController());
+        controllers.put(Action.DELETE_POST, new EventController());
     }
 
     public ResponseObject routeRequest(RequestObject request) {

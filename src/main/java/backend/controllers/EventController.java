@@ -84,7 +84,19 @@ public class EventController implements Controller {
                     if (postService.editPost(postDTO.getYapId(), postDTO.getContent())) {
                         return new ResponseObject(StatusCode.OK, null, "Post edited successfully");
                     } else {
-                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to create post");
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to edit post");
+                    }
+                } catch (Exception e) {
+                    return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
+                }
+            }
+            else if (request.getAction() == Action.DELETE_POST){
+                EditPostDTO postDTO = (EditPostDTO) data;
+                try {
+                    if (postService.removePost(postDTO.getYapId())) {
+                        return new ResponseObject(StatusCode.OK, null, "Post deleted successfully");
+                    } else {
+                        return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to delete post");
                     }
                 } catch (Exception e) {
                     return new ResponseObject(StatusCode.INTERNAL_SERVER_ERROR, null, "An error occurred while creating the post");
