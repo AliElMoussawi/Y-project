@@ -11,6 +11,7 @@ public enum Action {
     UNLIKE_POST,
     REPOST,
     COMMENT,
+    UNCOMMENT,
     REPLY,
     FOLLOW,
     UNFOLLOW,

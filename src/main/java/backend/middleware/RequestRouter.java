@@ -39,6 +39,8 @@ public class RequestRouter {
         controllers.put(Action.LIKE_POST, new EventController());
         controllers.put(Action.UNLIKE_POST, new EventController());
         controllers.put(Action.GET_POST, new EventController());
+        controllers.put(Action.COMMENT,new EventController());
+        controllers.put(Action.UNCOMMENT,new EventController());
     }
 
     public ResponseObject routeRequest(RequestObject request) {
