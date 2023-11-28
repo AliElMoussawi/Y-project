@@ -1,11 +1,20 @@
 package frontend;
 
 import backend.Client;
+import backend.dto.PostDTO;
+import backend.models.database.User;
+import backend.models.protocol.RequestObject;
+import backend.models.protocol.ResponseObject;
+import backend.services.UserServiceImpl;
+import backend.utils.enums.Action;
+import backend.utils.enums.Method;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static backend.Client.createRequest;
 
 public class HomePage extends JFrame {
 
@@ -14,9 +23,16 @@ public class HomePage extends JFrame {
     private JList<Tweet> tweetList;
     Client client;
     String token;
-    public HomePage(Client client, String token) {
+    String username;
+
+    User user;
+    public HomePage(Client client, String username, String token) {
         this.client = client;
         this.token = token;
+        this.username = username;
+        //get user by username
+        UserServiceImpl userService = new UserServiceImpl();
+        user = userService.getUserByUsernameOrEmail(username);
         setTitle("Twitter Home Page");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +50,9 @@ public class HomePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String tweetContent = tweetTextArea.getText();
                 if (!tweetContent.isEmpty()) {
-                    Tweet tweet = new Tweet("UserName", "user@example.com", tweetContent);
+                    // create a post action here and send it as broadcastObject
+                    createPost(user.getId(), tweetContent);
+                    Tweet tweet = new Tweet(username, user.getEmail(), tweetContent);
                     tweetListModel.addElement(tweet);
                     tweetTextArea.setText("");
                 }
@@ -52,7 +70,7 @@ public class HomePage extends JFrame {
                 if (index != -1) {
                     Tweet selectedTweet = tweetListModel.getElementAt(index);
                     // Navigate to user page (replace this with your logic)
-                    navigateToUserPage(selectedTweet.getUserName());
+                    navigateToUserPage(selectedTweet.getUserName(), selectedTweet.getEmail());
                 }
             }
         });
@@ -60,6 +78,7 @@ public class HomePage extends JFrame {
         userListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // get all users and pass then as argument to the UserListApp
                 UserListApp dialog = new UserListApp();
                 dialog.pack();
                 dialog.setVisible(true);
@@ -98,8 +117,8 @@ public class HomePage extends JFrame {
         );
     }
 
-    private void navigateToUserPage(String userName) {
-        UserPage dialog = new UserPage("Hanin", "haninjnasr@gmail.com");
+    private void navigateToUserPage(String userName, String email) {
+        UserPage dialog = new UserPage(userName, email);
         dialog.pack();
         dialog.setVisible(true);
 //        System.exit(0);
@@ -159,10 +178,20 @@ public class HomePage extends JFrame {
         }
     }
 
+    public ResponseObject createPost(long userId, String context){
+        RequestObject requestObject = new RequestObject();
+        requestObject.setAction(Action.UPLOAD_POST);
+        requestObject.setMethod(Method.POST);
+        requestObject.setToken(token);
+        PostDTO postDTO = new PostDTO();
+        postDTO.setUserId(userId);
+        postDTO.setContent(context);
+        requestObject.setObject(postDTO);
+        return createRequest(client, requestObject);
+    }
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            //HomePage twitterHomePage = new HomePage();
-          //  twitterHomePage.setVisible(true);
-        });
+        Client client = new Client("127.0.0.1", 9991, 1);
+        HomePage twitterHomePage = new HomePage(client,"asdasd1", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhc2Rhc2QxIiwiaWF0IjoxNzAxMTMwMDk0LCJleHAiOjE3MDExMzM2OTR9.uszrR1bx8gcz7lU3H2IosgWOwlrzSWXyA6JbVYh9ZM3K1ZGswNbjBVVKninlkM6dWnjrtDGcK8JPMAuxm_8iEw");
+        twitterHomePage.setVisible(true);
     }
 }

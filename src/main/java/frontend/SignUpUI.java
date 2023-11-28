@@ -50,7 +50,7 @@ public class SignUpUI extends JDialog {
         ResponseObject responseObject = createRequest(client, requestObject);
         if(responseObject.getStatusCode() == StatusCode.OK){
             String token = String.valueOf(responseObject.getObject());
-            openHomePage(client, token);
+            openHomePage(client, username, token);
         }
         usernameInput.setText("");
         emailInput.setText("");

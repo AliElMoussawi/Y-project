@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import backend.Server;
 import backend.interfaces.Controller;
 import backend.dto.AuthenticationDTO;
 import backend.models.database.User;
@@ -13,7 +14,7 @@ import backend.utils.enums.StatusCode;
 public class AuthenticationController implements Controller {
     UserServiceImpl userServiceImpl = new UserServiceImpl();
     @Override
-    public ResponseObject handleRequest(RequestObject request) {
+    public ResponseObject handleRequest(RequestObject request, Server.ClientHandler clientHandler) {
         switch (request.getAction()) {
             case LOGIN:
             case SIGNUP:

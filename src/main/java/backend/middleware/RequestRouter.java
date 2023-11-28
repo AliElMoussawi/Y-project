@@ -1,5 +1,6 @@
 package backend.middleware;
 
+import backend.Server;
 import backend.controllers.AuthenticationController;
 import backend.controllers.EventController;
 import backend.interfaces.Controller;
@@ -43,7 +44,7 @@ public class RequestRouter {
         controllers.put(Action.UNCOMMENT,new EventController());
     }
 
-    public ResponseObject routeRequest(RequestObject request) {
+    public ResponseObject routeRequest(RequestObject request, Server.ClientHandler clientHandler) {
         if (!interceptor.validRequest(request)) {
             return new ResponseObject(StatusCode.UNAUTHORIZED, null, "Invalid token or request");
         }
@@ -52,7 +53,7 @@ public class RequestRouter {
         Controller controller = controllers.get(action);
 
         if (controller != null) {
-            return controller.handleRequest(request);
+            return controller.handleRequest(request, clientHandler);
         } else {
             return new ResponseObject(StatusCode.BAD_REQUEST, null,"Unknown action");
         }

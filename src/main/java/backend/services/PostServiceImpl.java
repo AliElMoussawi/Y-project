@@ -6,6 +6,8 @@ import backend.repositories.PostRepositoryImpl;
 
 import java.util.List;
 
+import static backend.Server.broadcastMessage;
+
 public class PostServiceImpl implements PostService{
     private PostRepository postRepository = new PostRepositoryImpl();
 

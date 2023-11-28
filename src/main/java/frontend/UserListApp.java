@@ -16,9 +16,9 @@ public class UserListApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         userListModel = new DefaultListModel<>();
-        userListModel.addElement(new User("User1", "user1@example.com"));
-        userListModel.addElement(new User("User2", "user2@example.com"));
-        userListModel.addElement(new User("User3", "user3@example.com"));
+        userListModel.addElement(new User(1, "User1", "user1@example.com"));
+        userListModel.addElement(new User(2, "User2", "user2@example.com"));
+        userListModel.addElement(new User(3,"User3", "user3@example.com"));
 
         initComponents();
     }
@@ -59,14 +59,20 @@ public class UserListApp extends JFrame {
     }
 
     private class User {
+
+        private long userId;
         private String username;
         private String email;
         private boolean following;
 
-        public User(String username, String email) {
+        public User(long userId, String username, String email) {
+            this.userId = userId;
             this.username = username;
             this.email = email;
             this.following = false;
+        }
+        public long getUserId() {
+            return userId;
         }
 
         public String getUsername() {

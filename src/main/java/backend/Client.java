@@ -73,6 +73,8 @@ public class Client {
     }
     private void processSocketObject(SocketObject socketObject) {
         // todo  broadcast
+        System.out.println("Received the Socket Object : "+ socketObject.getObject().toString()+ " Action :"+ socketObject.getAction());
+        socketObject.getObject();
     }
 
      private void sendObject(Object object) {

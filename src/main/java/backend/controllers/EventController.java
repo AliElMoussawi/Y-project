@@ -1,17 +1,20 @@
 package backend.controllers;
 
+import backend.Server;
 import backend.dto.*;
 import backend.interfaces.Controller;
 import backend.models.database.Post;
 import backend.models.protocol.RequestObject;
 import backend.models.protocol.ResponseObject;
+import backend.models.protocol.SocketObject;
 import backend.services.*;
 import backend.utils.enums.Action;
 import backend.utils.enums.StatusCode;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.annotation.Repeatable;
 import java.util.List;
+
+import static backend.Server.broadcastMessage;
 
 public class EventController implements Controller {
     FollowService followService = new FollowServiceImpl();
@@ -20,7 +23,7 @@ public class EventController implements Controller {
     CommentService commentService=new CommentServiceImpl();
 
     @Override
-    public ResponseObject handleRequest(RequestObject request) {
+    public ResponseObject handleRequest(RequestObject request, Server.ClientHandler clientHandler) {
         Object data = request.getObject();
 
         if (data instanceof EventDTO) {
@@ -46,7 +49,7 @@ public class EventController implements Controller {
         {
             if(request.getAction() == Action.UPLOAD_POST) {
                 PostDTO postDTO = (PostDTO) data;
-                return uploadPost(postDTO);
+                return uploadPost(postDTO, clientHandler);
             }
         }
         else if (data instanceof EditPostDTO)
@@ -177,9 +180,13 @@ public class EventController implements Controller {
     }
 
     @NotNull
-    private ResponseObject uploadPost(PostDTO postDTO) {
+    private ResponseObject uploadPost(PostDTO postDTO, Server.ClientHandler clientHandler) {
         try {
             if (postService.createPost(postDTO.getUserId(), postDTO.getContent())) {
+                SocketObject socketObject = new SocketObject();
+                socketObject.setAction(Action.UPLOAD_POST);
+                socketObject.setObject(postDTO);
+                broadcastMessage(socketObject, clientHandler);
                 return new ResponseObject(StatusCode.OK, null, "Post created successfully");
             } else {
                 return new ResponseObject(StatusCode.BAD_REQUEST, null, "Failed to create post");
