@@ -45,11 +45,18 @@ public class LoginUI extends JDialog {
         if(responseObject.getStatusCode() == StatusCode.OK){
             String token = String.valueOf(responseObject.getObject());
             // navigate to the second page we can pass the token as argument
+            openHomePage(client,username, token);
         }
         usernameOrEmail.setText("");
         passwordInput.setText("");
     }
-
+    public static void openHomePage(Client client, String username, String token){
+       // SwingUtilities.invokeLater(() -> {
+            HomePage twitterHomePage = new HomePage(client, username, token);
+            twitterHomePage.pack();
+            twitterHomePage.setVisible(true);
+       // });
+    }
     public static void main(String[] args) {
         Client client = new Client("127.0.0.1", 9991, 1);
         LoginUI dialog = new LoginUI(client);

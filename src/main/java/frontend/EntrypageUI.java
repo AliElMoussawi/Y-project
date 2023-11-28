@@ -23,7 +23,8 @@ public class EntrypageUI extends JDialog {
                 LoginUI dialog = new LoginUI(client);
                 dialog.pack();
                 dialog.setVisible(true);
-                System.exit(0);            }
+                EntrypageUI.this.setVisible(false); // Show login form
+            }
         });
 
         signUpButton.addActionListener(new ActionListener() {

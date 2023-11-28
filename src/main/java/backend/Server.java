@@ -47,7 +47,7 @@ public class Server {
         scheduler.scheduleAtFixedRate(sendMessageTask, 0, 10, TimeUnit.SECONDS);
     }
 
-    public static void broadcastMessage(String message, ClientHandler excludeUser) {
+    public static void broadcastMessage(Object message, ClientHandler excludeUser) {
         for (ClientHandler aClient : clients) {
             if (aClient != excludeUser && aClient.isActive()) {
                 aClient.sendMessage(message);
@@ -55,8 +55,8 @@ public class Server {
         }
     }
 
-    private static class ClientHandler implements Runnable {
-        private Socket clientSocket;
+    public static class ClientHandler implements Runnable {
+        public final Socket clientSocket;
         private ObjectInputStream objectIn;
         private ObjectOutputStream objectOut;
         private volatile boolean isActive = true;
@@ -78,7 +78,7 @@ public class Server {
                     System.out.println("recieved object from the client : "+ obj.toString());
                     if (obj instanceof RequestObject) {
                         RequestObject request = (RequestObject) obj;
-                        ResponseObject requestResponse = requestRouter.routeRequest(request);
+                        ResponseObject requestResponse = requestRouter.routeRequest(request, this);
                         requestResponse.setRequestId(request.getId());
                         objectOut.writeObject(requestResponse);
                         objectOut.flush();
